@@ -450,8 +450,7 @@ class MsgSource(menus.ListPageSource):
         emb.description = msg.content
         emb.set_author(name=f"{msg.author} ({msg.author.id})", icon_url=msg.author.avatar_url)
         emb.set_footer(
-            text=f"Sniped at {menu.ctx.guild} | Page {menu.current_page+1}/{self._max_pages}",
-            icon_url=menu.ctx.guild.icon_url,
+            text=f"Sniped message by {msg.author}"
         )
 
         return emb
