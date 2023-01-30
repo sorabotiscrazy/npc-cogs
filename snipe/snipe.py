@@ -449,9 +449,6 @@ class MsgSource(menus.ListPageSource):
         emb = self.template_emb.copy()
         emb.description = msg.content
         emb.set_author(name=f"{msg.author} ({msg.author.id})", icon_url=msg.author.avatar_url)
-        emb.set_footer(
-            text=f"Sniped message by {msg.author}"
-        )
 
         return emb
 
