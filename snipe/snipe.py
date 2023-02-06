@@ -132,7 +132,6 @@ class Snipe(commands.Cog):
     ):
         """
         Snipe a channel's last deleted message for fun and profit.
-
         you can ignore a channel/server using [p]snipeset ignore
         """
         channel = channel or ctx.channel
@@ -447,8 +446,15 @@ class MsgSource(menus.ListPageSource):
 
     async def format_page(self, menu, msg):
         emb = self.template_emb.copy()
+        emb.title = f"Message Contents (Sent <t:{msg.created_at}:R>)"
         emb.description = msg.content
         emb.set_author(name=f"{msg.author} ({msg.author.id})", icon_url=msg.author.avatar_url)
+        emb.add_field(name="Channel", value=f"<#{msg.channel.id}>")
+        emb.add_field(name="Deleted At", value=f"<t:{msg.deleted_at}:R>")
+        emb.set_footer(
+            text=f"Sniped at {menu.ctx.guild} | Page {menu.current_page+1}/{self._max_pages}",
+            icon_url=menu.ctx.guild.icon_url,
+        )
 
         return emb
 
